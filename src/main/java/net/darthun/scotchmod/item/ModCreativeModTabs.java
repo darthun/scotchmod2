@@ -1,6 +1,7 @@
 package net.darthun.scotchmod.item;
 
 import net.darthun.scotchmod.ScotchMod;
+import net.darthun.scotchmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,6 +22,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.PEAT.get());
                         pOutput.accept(ModItems.GLENDARTHUN.get());
                         pOutput.accept(Items.DIAMOND);
+                        pOutput.accept(ModBlocks.PEAT_BLOCK.get());
                     })
                     .build());
 

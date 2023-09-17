@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "scotchmod:block/peat_block"
+    }
+  }
+}

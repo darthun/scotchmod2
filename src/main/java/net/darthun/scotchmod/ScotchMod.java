@@ -1,6 +1,7 @@
 package net.darthun.scotchmod;
 
 import com.mojang.logging.LogUtils;
+import net.darthun.scotchmod.block.ModBlocks;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -57,6 +58,7 @@ public class ScotchMod
 
         ModCreativeModTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

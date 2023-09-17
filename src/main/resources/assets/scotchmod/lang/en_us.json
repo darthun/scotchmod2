@@ -1,5 +1,8 @@
 {
   "item.scotchmod.peat": "Peat",
   "item.scotchmod.glendarthun": "Glendarthun",
+
+
+  "block.scotchmod.peat_block": "Block of Peat",
   "creativetab.scotchmod_tab": "Scotch Mod Tab"
 }
