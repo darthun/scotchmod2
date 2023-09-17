@@ -18,7 +18,6 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, ScotchMod.MOD_ID);
 
-    private static Object BlockBehavior;
     public static final RegistryObject<Block> PEAT_BLOCK = registerBlock("peat_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
     

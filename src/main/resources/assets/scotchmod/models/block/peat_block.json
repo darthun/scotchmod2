@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
-  "texture": {
+  "textures": {
     "all": "scotchmod:block/peat_block"
   }
 }
