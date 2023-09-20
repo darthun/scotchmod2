@@ -23,6 +23,10 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.GLENDARTHUN.get());
                         pOutput.accept(Items.DIAMOND);
                         pOutput.accept(ModBlocks.PEAT_BLOCK.get());
+                        pOutput.accept(ModItems.BARLEY_SEED.get());
+                        pOutput.accept(ModItems.BARLEY_GROWN.get());
+                        pOutput.accept(ModItems.YEAST.get());
+
                     })
                     .build());
 

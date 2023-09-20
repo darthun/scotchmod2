@@ -102,10 +102,11 @@ public class ScotchMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
 
+        /*
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS)
             event.accept(ModItems.PEAT);
             event.accept(ModItems.GLENDARTHUN);
-
+        */
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

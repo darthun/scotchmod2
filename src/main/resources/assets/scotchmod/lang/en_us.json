@@ -1,8 +1,12 @@
 {
   "item.scotchmod.peat": "Peat",
   "item.scotchmod.glendarthun": "Glendarthun",
+  "item.scotchmod.barleyseed": "Barley Seed",
+  "item.scotchmod.barleygrown": "Barley",
+  "item.scotchmod.yeast": "Yeast",
 
 
   "block.scotchmod.peat_block": "Block of Peat",
+
   "creativetab.scotchmod_tab": "Scotch Mod Tab"
 }
