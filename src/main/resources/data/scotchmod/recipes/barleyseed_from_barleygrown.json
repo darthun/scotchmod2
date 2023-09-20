@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item":"scotchmod:barleygrown"
+    }
+  ],
+  "result": {
+    "item": "scotchmod:barleyseed",
+    "count": 1
+  }
+}

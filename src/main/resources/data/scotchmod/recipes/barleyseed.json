@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WBW",
+    "DAD",
+    "WBW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wheat"
+    },
+    "D": {
+      "tag": "minecraft:diamond"
+    },
+    "B": {
+      "item": "minecraft:bone_meal"
+    },
+    "A": {
+      "item": "minecraft:apple"
+    }
+  },
+  "result": {
+    "item": "scotchmod:barleyseed",
+    "count": 2
+  }
+}

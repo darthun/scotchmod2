@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#D#",
+    "DWD",
+    "#D#"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:sand"
+    },
+    "D": {
+      "tag": "minecraft:dirt"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "scotchmod:bogearth_block",
+    "count": 8
+  }
+}
