@@ -8,10 +8,10 @@
   ],
   "key": {
     "W": {
-      "tag": "minecraft:wheat"
+      "item": "minecraft:wheat"
     },
     "D": {
-      "tag": "minecraft:diamond"
+      "item": "minecraft:diamond"
     },
     "B": {
       "item": "minecraft:bone_meal"
@@ -21,7 +21,6 @@
     }
   },
   "result": {
-    "item": "scotchmod:barleyseed",
-    "count": 2
+    "item": "scotchmod:barleyseed"
   }
 }
