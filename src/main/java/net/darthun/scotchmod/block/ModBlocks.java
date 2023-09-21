@@ -20,6 +20,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PEAT_BLOCK = registerBlock("peat_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+
+    public static final RegistryObject<Block> BOGEARTH_BLOCK = registerBlock("bogearth_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);
