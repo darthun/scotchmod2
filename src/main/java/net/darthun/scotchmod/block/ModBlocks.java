@@ -19,10 +19,12 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, ScotchMod.MOD_ID);
 
     public static final RegistryObject<Block> PEAT_BLOCK = registerBlock("peat_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
+                    .requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> BOGEARTH_BLOCK = registerBlock("bogearth_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
+                    .requiresCorrectToolForDrops()));
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);
