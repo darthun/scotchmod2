@@ -1,6 +1,7 @@
 package net.darthun.scotchmod.block;
 
 import net.darthun.scotchmod.ScotchMod;
+import net.darthun.scotchmod.block.custom.BarleyCropBlock;
 import net.darthun.scotchmod.block.custom.BogearthBlock;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -26,6 +27,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BOGEARTH_BLOCK = registerBlock("bogearth_block",
             () -> new BogearthBlock(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> BARLEY_BLOCK = BLOCKS.register("barley_block",
+            () -> new BarleyCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);

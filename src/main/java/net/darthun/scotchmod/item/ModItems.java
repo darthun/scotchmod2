@@ -1,8 +1,10 @@
 package net.darthun.scotchmod.item;
 
 import net.darthun.scotchmod.ScotchMod;
+import net.darthun.scotchmod.block.ModBlocks;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,7 +18,7 @@ public class ModItems {
             ()-> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BARLEY_SEED = ITEMS.register("barleyseed",
-            ()-> new Item(new Item.Properties()));
+            ()-> new ItemNameBlockItem(ModBlocks.BARLEY_BLOCK.get(),new Item.Properties()));
     public static final RegistryObject<Item> BARLEY_GROWN = ITEMS.register("barleygrown",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GLENDARTHUN = ITEMS.register("glendarthun",
