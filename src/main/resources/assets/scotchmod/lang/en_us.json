@@ -8,5 +8,8 @@
 
   "block.scotchmod.peat_block": "Block of Peat",
   "block.scotchmod.bogearth_block": "Bog Earth",
+
+  "tooltip.scotchmod.bogearth_block": "Place near water to make Peat",
+
   "creativetab.scotchmod_tab": "Scotch Mod Tab"
 }

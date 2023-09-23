@@ -1,6 +1,7 @@
 package net.darthun.scotchmod.block;
 
 import net.darthun.scotchmod.ScotchMod;
+import net.darthun.scotchmod.block.custom.BogearthBlock;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -23,7 +24,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> BOGEARTH_BLOCK = registerBlock("bogearth_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
+            () -> new BogearthBlock(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .requiresCorrectToolForDrops()));
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
