@@ -140,8 +140,10 @@ public class ScotchMod
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WORT.get(), RenderType.translucent());
                 //ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WASH.get(), RenderType.translucent());
                 //ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WASH.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_DISTILLED_WASH.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_DISTILLED_WASH.get(), RenderType.translucent());
+                //ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_DISTILLED_WASH.get(), RenderType.translucent());
+                //ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_DISTILLED_WASH.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_NEW_MAKE.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_NEW_MAKE.get(), RenderType.translucent());
             });
         }
     }

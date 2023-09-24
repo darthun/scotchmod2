@@ -30,6 +30,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.WORT_BUCKET.get());
                         pOutput.accept(ModItems.WASH_BUCKET.get());
                         pOutput.accept(ModItems.DISTILLED_WASH_BUCKET.get());
+                        pOutput.accept(ModItems.NEW_MAKE_BUCKET.get());
 
                     })
                     .build());
