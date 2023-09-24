@@ -45,6 +45,9 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> NEW_MAKE_BLOCK = BLOCKS.register("new_make_block",
             () -> new LiquidBlock(ModFluids.SOURCE_NEW_MAKE,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
+    public static final RegistryObject<LiquidBlock> GLENDARTHUN_BLOCK = BLOCKS.register("glendarthun_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_GLENDARTHUN,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);

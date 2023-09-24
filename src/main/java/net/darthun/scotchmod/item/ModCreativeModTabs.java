@@ -31,6 +31,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.WASH_BUCKET.get());
                         pOutput.accept(ModItems.DISTILLED_WASH_BUCKET.get());
                         pOutput.accept(ModItems.NEW_MAKE_BUCKET.get());
+                        pOutput.accept(ModItems.GLENDARTHUN_BUCKET.get());
 
                     })
                     .build());

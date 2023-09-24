@@ -52,6 +52,14 @@ public class ModFluids {
             ModFluidTypes.NEW_MAKE_FLUID_TYPE,SOURCE_NEW_MAKE,FLOWING_NEW_MAKE)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocks.NEW_MAKE_BLOCK).bucket(ModItems.NEW_MAKE_BUCKET);
 
+    // GLENDARTHUN
+    public static final RegistryObject<FlowingFluid> SOURCE_GLENDARTHUN = FLUIDS.register("glendarthun_fluid",
+            ()-> new ForgeFlowingFluid.Source(ModFluids.GLENDARTHUN_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_GLENDARTHUN = FLUIDS.register("flowing_glendarthun",
+            ()-> new ForgeFlowingFluid.Flowing(ModFluids.GLENDARTHUN_FLUID_PROPERTIES));
+    public static final ForgeFlowingFluid.Properties GLENDARTHUN_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.GLENDARTHUN_FLUID_TYPE,SOURCE_GLENDARTHUN,FLOWING_GLENDARTHUN)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocks.GLENDARTHUN_BLOCK).bucket(ModItems.GLENDARTHUN_BUCKET);
 
     public static void register(IEventBus eventBus){
         FLUIDS.register(eventBus);

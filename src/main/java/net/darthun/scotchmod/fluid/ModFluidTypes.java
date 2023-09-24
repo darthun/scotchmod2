@@ -39,6 +39,12 @@ public class ModFluidTypes {
             new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xA1FF9210,
                     new Vector3f(1f,146f/255f,16f/255f),
                     FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
+
+    //GLENDARTHUN
+    public static final RegistryObject<FluidType> GLENDARTHUN_FLUID_TYPE = registerFluidType("glendarthun_fluid",
+            new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xA1EE5100,
+                    new Vector3f(238f/255f,81f/255f,0f),
+                    FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
             /*
             * Fluids to add:
 Wort RGB 134-75-9 #864B09 DONE HERE

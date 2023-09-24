@@ -144,6 +144,8 @@ public class ScotchMod
                 //ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_DISTILLED_WASH.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_NEW_MAKE.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_NEW_MAKE.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_GLENDARTHUN.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_GLENDARTHUN.get(), RenderType.translucent());
             });
         }
     }

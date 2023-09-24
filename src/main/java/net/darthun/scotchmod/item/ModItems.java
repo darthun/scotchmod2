@@ -41,6 +41,9 @@ public class ModItems {
     public static final RegistryObject<Item> NEW_MAKE_BUCKET = ITEMS.register("new_make_bucket",
             ()-> new BucketItem(ModFluids.SOURCE_NEW_MAKE,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final RegistryObject<Item> GLENDARTHUN_BUCKET = ITEMS.register("glendarthun_bucket",
+            ()-> new BucketItem(ModFluids.SOURCE_GLENDARTHUN,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
