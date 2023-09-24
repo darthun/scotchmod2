@@ -39,6 +39,8 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> WASH_BLOCK = BLOCKS.register("wash_block",
             () -> new LiquidBlock(ModFluids.SOURCE_WASH,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
+    public static final RegistryObject<LiquidBlock> DISTILLED_WASH_BLOCK = BLOCKS.register("distilled_wash_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_DISTILLED_WASH,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){

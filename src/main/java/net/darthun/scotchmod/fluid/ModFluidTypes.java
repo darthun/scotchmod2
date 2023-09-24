@@ -28,6 +28,11 @@ public class ModFluidTypes {
             new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xFFA09D89,
                     new Vector3f(160f/255f,157f/255f,137f/255f),
                     FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
+    //DISTILLED WASH
+    public static final RegistryObject<FluidType> DISTILLED_WASH_FLUID_TYPE = registerFluidType("distilled_wash_fluid",
+            new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xA1DE810B,
+                    new Vector3f(222f/255f,129f/255f,11f/255f),
+                    FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
             /*
             * Fluids to add:
 Wort RGB 134-75-9 #864B09 DONE HERE

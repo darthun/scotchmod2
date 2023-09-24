@@ -33,6 +33,16 @@ public class ModFluids {
     public static final ForgeFlowingFluid.Properties WASH_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
             ModFluidTypes.WASH_FLUID_TYPE,SOURCE_WASH,FLOWING_WASH)
             .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocks.WASH_BLOCK).bucket(ModItems.WASH_BUCKET);
+
+    // DISTILLED WASH
+    public static final RegistryObject<FlowingFluid> SOURCE_DISTILLED_WASH = FLUIDS.register("distilled_wash_fluid",
+            ()-> new ForgeFlowingFluid.Source(ModFluids.DISTILLED_WASH_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_DISTILLED_WASH = FLUIDS.register("flowing_distilled_wash_fluid",
+            ()-> new ForgeFlowingFluid.Flowing(ModFluids.DISTILLED_WASH_FLUID_PROPERTIES));
+    public static final ForgeFlowingFluid.Properties DISTILLED_WASH_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.DISTILLED_WASH_FLUID_TYPE,SOURCE_DISTILLED_WASH,FLOWING_DISTILLED_WASH)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).block(ModBlocks.DISTILLED_WASH_BLOCK).bucket(ModItems.DISTILLED_WASH_BUCKET);
+
     public static void register(IEventBus eventBus){
         FLUIDS.register(eventBus);
     }

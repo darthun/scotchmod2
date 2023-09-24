@@ -35,6 +35,9 @@ public class ModItems {
     public static final RegistryObject<Item> WASH_BUCKET = ITEMS.register("wash_bucket",
             ()-> new BucketItem(ModFluids.SOURCE_WASH,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final RegistryObject<Item> DISTILLED_WASH_BUCKET = ITEMS.register("distilled_wash_bucket",
+            ()-> new BucketItem(ModFluids.SOURCE_DISTILLED_WASH,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
