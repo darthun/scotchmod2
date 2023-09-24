@@ -18,11 +18,16 @@ public class ModFluidTypes {
     public static final DeferredRegister<FluidType> FLUID_TYPES =
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, ScotchMod.MOD_ID);
 
+    //WORT
     public static final RegistryObject<FluidType> WORT_FLUID_TYPE = registerFluidType("wort_fluid",
-            new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xA1864B09,
+            new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xFF864B09,
                     new Vector3f(134f/255f,75f/255f,9f/255f),
                     FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
-
+    //WASH
+    public static final RegistryObject<FluidType> WASH_FLUID_TYPE = registerFluidType("wash_fluid",
+            new BaseFluidType(WATER_STILL_RL,WATER_FLOWING_RL,WATER_OVERLAY_RL,0xFFA09D89,
+                    new Vector3f(160f/255f,157f/255f,137f/255f),
+                    FluidType.Properties.create().lightLevel(2).viscosity(5).density(15)));
             /*
             * Fluids to add:
 Wort RGB 134-75-9 #864B09 DONE HERE

@@ -28,6 +28,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.BARLEY_GROWN.get());
                         pOutput.accept(ModItems.YEAST.get());
                         pOutput.accept(ModItems.WORT_BUCKET.get());
+                        pOutput.accept(ModItems.WASH_BUCKET.get());
 
                     })
                     .build());

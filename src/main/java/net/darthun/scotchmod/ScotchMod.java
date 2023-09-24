@@ -2,7 +2,7 @@ package net.darthun.scotchmod;
 
 import com.mojang.logging.LogUtils;
 import net.darthun.scotchmod.block.ModBlocks;
-import net.darthun.scotchmod.datagen.ModFluidTagsProvider;
+//import net.darthun.scotchmod.datagen.ModFluidTagsProvider;
 import net.darthun.scotchmod.fluid.ModFluidTypes;
 import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
@@ -138,6 +138,8 @@ public class ScotchMod
             event.enqueueWork(()->{
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WORT.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WORT.get(), RenderType.translucent());
+                //ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WASH.get(), RenderType.translucent());
+                //ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WASH.get(), RenderType.translucent());
             });
         }
     }
