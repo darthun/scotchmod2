@@ -2,8 +2,14 @@ package net.darthun.scotchmod;
 
 import com.mojang.logging.LogUtils;
 import net.darthun.scotchmod.block.ModBlocks;
+import net.darthun.scotchmod.datagen.ModFluidTagsProvider;
+import net.darthun.scotchmod.fluid.ModFluidTypes;
+import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -59,6 +65,9 @@ public class ScotchMod
         ModCreativeModTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
+
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -126,11 +135,10 @@ public class ScotchMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            /*
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            */
+            event.enqueueWork(()->{
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_WORT.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_WORT.get(), RenderType.translucent());
+            });
         }
     }
 }

@@ -27,6 +27,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.BARLEY_SEED.get());
                         pOutput.accept(ModItems.BARLEY_GROWN.get());
                         pOutput.accept(ModItems.YEAST.get());
+                        pOutput.accept(ModItems.WORT_BUCKET.get());
 
                     })
                     .build());

@@ -3,11 +3,13 @@ package net.darthun.scotchmod.block;
 import net.darthun.scotchmod.ScotchMod;
 import net.darthun.scotchmod.block.custom.BarleyCropBlock;
 import net.darthun.scotchmod.block.custom.BogearthBlock;
+import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -30,7 +32,11 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BARLEY_BLOCK = BLOCKS.register("barley_block",
             () -> new BarleyCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
-    
+
+    public static final RegistryObject<LiquidBlock> WORT_BLOCK = BLOCKS.register("wort_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_WORT,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);
         registerBlockItem(name,toReturn);
