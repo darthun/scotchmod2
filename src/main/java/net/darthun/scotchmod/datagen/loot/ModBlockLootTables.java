@@ -30,7 +30,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BOGEARTH_BLOCK.get());
         this.dropOther(ModBlocks.PEAT_BLOCK.get(),ModItems.PEAT.get());
 
-
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BARLEY_BLOCK.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BarleyCropBlock.AGE, 7));
         this.createCropDrops(ModBlocks.BARLEY_BLOCK.get(),ModItems.BARLEY_GROWN.get(),ModItems.BARLEY_SEED.get(),lootitemcondition$builder1 );

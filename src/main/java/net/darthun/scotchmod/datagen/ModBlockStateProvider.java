@@ -24,7 +24,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         //blockWithItem(ModBlocks.ALEXANDRITE_BLOCK);
-        //makeCrop(((BarleyCropBlock)ModBlocks.BARLEY_BLOCK.get()),"barley_stage","barley_stage");
+        makeCrop(((BarleyCropBlock)ModBlocks.BARLEY_BLOCK.get()),"barley_stage","barley_stage");
     }
 
     //Normal block like IRON
