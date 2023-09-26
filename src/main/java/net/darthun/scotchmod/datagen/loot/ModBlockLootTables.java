@@ -32,11 +32,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BARLEY_BLOCK.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BarleyCropBlock.AGE, 7));
-        this.createCropDrops(ModBlocks.BARLEY_BLOCK.get(),ModItems.BARLEY_GROWN.get(),ModItems.BARLEY_SEED.get(),lootitemcondition$builder1 );
+        this.add(ModBlocks.BARLEY_BLOCK.get(), createCropDrops(ModBlocks.BARLEY_BLOCK.get(),ModItems.BARLEY_GROWN.get(),
+                ModItems.BARLEY_SEED.get(),lootitemcondition$builder1 ));
 
 //        this.dropSelf(ModBlocks.ALEXANDRITE_BLOCK.get());
-
-//        this.add(ModBlocks.ALEXANDRITE_ORE.get(),
+//       this.add(ModBlocks.ALEXANDRITE_ORE.get(),
 //                block -> createDrop(ModBlocks.ALEXANDRITE_ORE().get(), ModItems.RAW_ALEXANDRITE.get()));
     }
 
