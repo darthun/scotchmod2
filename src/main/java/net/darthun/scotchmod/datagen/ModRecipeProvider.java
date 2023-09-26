@@ -5,7 +5,10 @@ import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.lwjgl.openal.AL;
 
@@ -27,6 +30,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("   ")
                 .define('B', ModItems.PEAT.get())
                 .unlockedBy("has_peat",inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.PEAT.get())
+                        .build()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CHERRYOAK_BARREL_BLOCK.get())
+                .pattern("CIC")
+                .pattern("C C")
+                .pattern("COC")
+                .define('I', Items.IRON_NUGGET)
+                .define('O', Blocks.OAK_SLAB)
+                .define('C', Blocks.CHERRY_PLANKS)
+                .unlockedBy("has_cherryplanks",inventoryTrigger(ItemPredicate.Builder.item().of(Items.CHERRY_PLANKS)
                         .build()))
                 .save(pWriter);
 

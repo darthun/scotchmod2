@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -25,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         //blockWithItem(ModBlocks.ALEXANDRITE_BLOCK);
         makeCrop(((BarleyCropBlock)ModBlocks.BARLEY_BLOCK.get()),"barley_stage","barley_stage");
+        horizontalBlock(ModBlocks.CHERRYOAK_BARREL_BLOCK.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/cherryoak_barrel_block")));
     }
 
     //Normal block like IRON

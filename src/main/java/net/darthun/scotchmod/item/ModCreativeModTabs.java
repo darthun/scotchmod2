@@ -32,6 +32,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.DISTILLED_WASH_BUCKET.get());
                         pOutput.accept(ModItems.NEW_MAKE_BUCKET.get());
                         pOutput.accept(ModItems.GLENDARTHUN_BUCKET.get());
+                        pOutput.accept(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
 
                     })
                     .build());

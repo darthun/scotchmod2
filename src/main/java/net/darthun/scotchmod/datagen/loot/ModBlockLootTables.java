@@ -5,13 +5,10 @@ import net.darthun.scotchmod.block.custom.BarleyCropBlock;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CropBlock;
+
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.registries.RegistryObject;
@@ -28,12 +25,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.BOGEARTH_BLOCK.get());
+        this.dropSelf(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
         this.dropOther(ModBlocks.PEAT_BLOCK.get(),ModItems.PEAT.get());
 
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BARLEY_BLOCK.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BarleyCropBlock.AGE, 7));
         this.add(ModBlocks.BARLEY_BLOCK.get(), createCropDrops(ModBlocks.BARLEY_BLOCK.get(),ModItems.BARLEY_GROWN.get(),
                 ModItems.BARLEY_SEED.get(),lootitemcondition$builder1 ));
+
+
 
 //        this.dropSelf(ModBlocks.ALEXANDRITE_BLOCK.get());
 //       this.add(ModBlocks.ALEXANDRITE_ORE.get(),
