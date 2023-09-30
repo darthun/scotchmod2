@@ -2,6 +2,7 @@ package net.darthun.scotchmod.block;
 
 import net.darthun.scotchmod.ScotchMod;
 import net.darthun.scotchmod.block.custom.BarleyCropBlock;
+import net.darthun.scotchmod.block.custom.BarleySteepBlock;
 import net.darthun.scotchmod.block.custom.BogearthBlock;
 import net.darthun.scotchmod.block.custom.CherryoakBarrelBlock;
 import net.darthun.scotchmod.fluid.ModFluids;
@@ -34,6 +35,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CHERRYOAK_BARREL_BLOCK = registerBlock("cherryoak_barrel_block",
             () -> new CherryoakBarrelBlock(BlockBehaviour.Properties.copy(Blocks.BARREL)
                     .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> BARLEY_STEEP_BLOCK = registerBlock("barley_steep_block",
+            () -> new BarleySteepBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_STONE)));
 
     public static final RegistryObject<Block> BARLEY_BLOCK = BLOCKS.register("barley_block",
             () -> new BarleyCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));

@@ -3,10 +3,12 @@ package net.darthun.scotchmod;
 import com.mojang.logging.LogUtils;
 import net.darthun.scotchmod.block.ModBlocks;
 //import net.darthun.scotchmod.datagen.ModFluidTagsProvider;
+import net.darthun.scotchmod.block.entity.ModBlockEntities;
 import net.darthun.scotchmod.fluid.ModFluidTypes;
 import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
+import net.darthun.scotchmod.screen.ModeMenuTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -67,6 +69,8 @@ public class ScotchMod
         ModBlocks.register(modEventBus);
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModeMenuTypes.register(modEventBus);
 
 
         // Register the commonSetup method for modloading

@@ -28,6 +28,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         makeCrop(((BarleyCropBlock)ModBlocks.BARLEY_BLOCK.get()),"barley_stage","barley_stage");
         horizontalBlock(ModBlocks.CHERRYOAK_BARREL_BLOCK.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/cherryoak_barrel_block")));
+        horizontalBlock(ModBlocks.BARLEY_STEEP_BLOCK.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/barley_steep_block")));
     }
 
     //Normal block like IRON

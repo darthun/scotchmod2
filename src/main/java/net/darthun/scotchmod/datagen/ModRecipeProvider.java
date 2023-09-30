@@ -44,6 +44,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .build()))
                 .save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BARLEY_STEEP_BLOCK.get())
+                .pattern("CBC")
+                .pattern("CWC")
+                .pattern("CCC")
+                .define('B', ModItems.BARLEY_GROWN.get())
+                .define('W', Items.WATER_BUCKET)
+                .define('C', Blocks.SMOOTH_STONE)
+                .unlockedBy("has_barley",inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.BARLEY_GROWN.get())
+                        .build()))
+                .save(pWriter);
+
 //        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,ModItems.GLENDARTHUN_BUCKET.get())
 //                .requires(ModItems.BARLEY_GROWN.get(),9)
 //                .unlockedBy("has_glendarthun",inventoryTrigger(ItemPredicate.Builder.item()

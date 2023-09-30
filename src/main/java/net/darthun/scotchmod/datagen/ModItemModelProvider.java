@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         //simpleItem(ModItems.ALEXANDRITE);
         complexBlock(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
+        complexBlock(ModBlocks.BARLEY_STEEP_BLOCK.get());
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){
