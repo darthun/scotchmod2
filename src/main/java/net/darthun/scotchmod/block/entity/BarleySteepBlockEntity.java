@@ -60,8 +60,8 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot){
                 case 0 -> stack.getItem() == ModItems.BARLEY_GROWN.get();
-                case 1 -> true;
-                case 2 -> false;
+                case 1 -> true; //liquid
+                case 2 -> false; //output
                 default -> super.isItemValid(slot,stack);
             };
         }

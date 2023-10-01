@@ -34,9 +34,9 @@ public class BarleySteepMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler,0,80,11));
-            this.addSlot(new SlotItemHandler(iItemHandler,1,26,59));
-            this.addSlot(new SlotItemHandler(iItemHandler,2,129,59));
+            this.addSlot(new SlotItemHandler(iItemHandler,0,118,68));
+            this.addSlot(new SlotItemHandler(iItemHandler,1,25,65));
+            this.addSlot(new SlotItemHandler(iItemHandler,2,223,68));
 
         });
 
@@ -114,5 +114,17 @@ public class BarleySteepMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    public boolean isCrafting() {
+        return data.get(0)>0;
+    }
+
+    public int getScaledProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);
+        int progressArrowSize =43;
+
+        return maxProgress!=0 && progress!=0? progress* progressArrowSize / maxProgress:0;
     }
 }

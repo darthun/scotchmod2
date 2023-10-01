@@ -8,7 +8,9 @@ import net.darthun.scotchmod.fluid.ModFluidTypes;
 import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
+import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.ModeMenuTypes;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -150,6 +152,8 @@ public class ScotchMod
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_NEW_MAKE.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_GLENDARTHUN.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_GLENDARTHUN.get(), RenderType.translucent());
+
+                MenuScreens.register(ModeMenuTypes.BARLEY_STEEP_MENU.get(), BarleySteepScreen::new);
             });
         }
     }
