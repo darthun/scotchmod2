@@ -1,0 +1,12 @@
+{
+  "type": "scotchmod:barley_steep",
+  "ingredients": [
+    {
+      "item": "scotchmod:barleygrown"
+    }
+  ],
+  "output": {
+    "item": "scotchmod:malted_barley_block",
+    "count": 1
+  }
+}

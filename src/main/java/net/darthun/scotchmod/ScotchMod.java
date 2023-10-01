@@ -8,6 +8,7 @@ import net.darthun.scotchmod.fluid.ModFluidTypes;
 import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
+import net.darthun.scotchmod.recipe.ModRecipes;
 import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.ModeMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -73,6 +74,7 @@ public class ScotchMod
         ModFluids.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModeMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
 
         // Register the commonSetup method for modloading

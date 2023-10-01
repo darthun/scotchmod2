@@ -2,6 +2,7 @@ package net.darthun.scotchmod.block.entity;
 
 import net.darthun.scotchmod.block.ModBlocks;
 import net.darthun.scotchmod.item.ModItems;
+import net.darthun.scotchmod.recipe.BarleySteepRecipe;
 import net.darthun.scotchmod.screen.BarleySteepMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +28,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider {
     public BarleySteepBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -65,7 +68,7 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot){
-                case 0 -> stack.getItem() == ModItems.BARLEY_GROWN.get();
+                case 0 -> true;
                 case 1 -> true; //liquid
                 case 2 -> false; //output
                 default -> super.isItemValid(slot,stack);
@@ -151,21 +154,38 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     private void craftItem() {
+        Optional<BarleySteepRecipe> recipe = getCurrentRecipe();
+        ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
         this.itemHandler.extractItem(INPUT_SLOT,1,false);
 
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(ModBlocks.MALTED_BARLEY_BLOCK.get(),
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()+1));
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(resultItem.getItem(),
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + resultItem.getCount()));
     }
 
 
     private boolean hasRecipe() {
-        return canInsertAmountIntoOutputSlot(1) && canInsertItemIntoOutputSlot(ModBlocks.MALTED_BARLEY_BLOCK.get().asItem())
-                && hasRecipeItemInInputSlot();
+        Optional<BarleySteepRecipe> recipe = getCurrentRecipe();
+
+        if (recipe.isEmpty()) {
+            return false;
+        }
+        ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
+        return canInsertAmountIntoOutputSlot(resultItem.getCount())
+                && canInsertItemIntoOutputSlot(resultItem.getItem());
     }
 
+    private Optional<BarleySteepRecipe> getCurrentRecipe() {
+        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
+        for(int i=0;i<this.itemHandler.getSlots();i++){
+            inventory.setItem(i,this.itemHandler.getStackInSlot(i));
+        }
+        return this.level.getRecipeManager().getRecipeFor(BarleySteepRecipe.Type.INSTANCE,inventory,level);
+    }
+
+    /*
     private boolean hasRecipeItemInInputSlot() {
         return this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() == ModItems.BARLEY_GROWN.get();
-    }
+    }*/
 
     private boolean canInsertItemIntoOutputSlot(Item item) {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item)
