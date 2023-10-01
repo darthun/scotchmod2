@@ -34,6 +34,8 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.GLENDARTHUN_BUCKET.get());
                         pOutput.accept(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
                         pOutput.accept(ModBlocks.BARLEY_STEEP_BLOCK.get());
+                        pOutput.accept(ModBlocks.MALTED_BARLEY_BLOCK.get());
+                        pOutput.accept(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get());
 
                     })
                     .build());

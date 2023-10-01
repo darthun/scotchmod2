@@ -30,6 +30,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 new ModelFile.UncheckedModelFile(modLoc("block/cherryoak_barrel_block")));
         horizontalBlock(ModBlocks.BARLEY_STEEP_BLOCK.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/barley_steep_block")));
+        blockWithItem(ModBlocks.MALTED_BARLEY_BLOCK);
+        blockWithItem(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK);
     }
 
     //Normal block like IRON

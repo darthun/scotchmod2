@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -28,6 +29,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
         this.dropOther(ModBlocks.PEAT_BLOCK.get(),ModItems.PEAT.get());
         this.dropSelf(ModBlocks.BARLEY_STEEP_BLOCK.get());
+        this.dropSelf(ModBlocks.MALTED_BARLEY_BLOCK.get());
+        this.dropSelf(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get());
 
 
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BARLEY_BLOCK.get())

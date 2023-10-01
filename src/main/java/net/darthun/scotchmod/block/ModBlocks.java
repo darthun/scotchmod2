@@ -28,6 +28,12 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> MALTED_BARLEY_BLOCK = registerBlock("malted_barley_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
+
+    public static final RegistryObject<Block> SMOKED_MALTED_BARLEY_BLOCK = registerBlock("smoked_malted_barley_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
+
     public static final RegistryObject<Block> BOGEARTH_BLOCK = registerBlock("bogearth_block",
             () -> new BogearthBlock(BlockBehaviour.Properties.copy(Blocks.DIRT)
                     .requiresCorrectToolForDrops()));
