@@ -3,6 +3,7 @@ package net.darthun.scotchmod.block.entity;
 import net.darthun.scotchmod.item.ModItems;
 import net.darthun.scotchmod.screen.BarleySteepMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -12,10 +13,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -121,8 +126,59 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         Containers.dropContents(this.level,this.worldPosition,inventory);
     }
 
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if(cap == ForgeCapabilities.ITEM_HANDLER){
+            return lazyItemHandler.cast();
+        }
+        return super.getCapability(cap,side);
+    }
+
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
+        if (isOutputSlotEmptyOrReceivable() && hasRecipe()){
+            this.progress++;
+            setChanged(pLevel,pPos,pState);
+            if(this.progress >= this.maxProgress){
+                craftItem();
+                this.progress = 0;
+            }
+        }else{
+            this.progress = 0;
+        }
+
+    }
+
+    private void craftItem() {
+        this.itemHandler.extractItem(INPUT_SLOT,1,false);
+
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(Items.DIAMOND,
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()+1));
+    }
+
+
+    private boolean hasRecipe() {
+        return canInsertAmountIntoOutputSlot(1) && canInsertItemIntoOutputSlot(Items.DIAMOND)
+                && hasRecipeItemInInputSlot();
+    }
+
+    private boolean hasRecipeItemInInputSlot() {
+        return this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() == ModItems.BARLEY_GROWN.get();
+    }
+
+    private boolean canInsertItemIntoOutputSlot(Item diamond) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(diamond)
+                || this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty();
+    }
+
+    private boolean canInsertAmountIntoOutputSlot(int count) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize() >=
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count;
+    }
+
+    private boolean isOutputSlotEmptyOrReceivable() {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
     }
 
 

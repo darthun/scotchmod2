@@ -43,7 +43,7 @@ public class BarleySteepScreen extends AbstractContainerScreen<BarleySteepMenu> 
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 165, y + 72, 353, 0, menu.getScaledProgress(), 30);
+            guiGraphics.blit(TEXTURE, x + 75, y + 26, 176, 0, menu.getScaledProgress(), 21);
         }
     }
 
