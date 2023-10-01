@@ -1,5 +1,6 @@
 package net.darthun.scotchmod.block.entity;
 
+import net.darthun.scotchmod.block.ModBlocks;
 import net.darthun.scotchmod.item.ModItems;
 import net.darthun.scotchmod.screen.BarleySteepMenu;
 import net.minecraft.core.BlockPos;
@@ -152,13 +153,13 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     private void craftItem() {
         this.itemHandler.extractItem(INPUT_SLOT,1,false);
 
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(Items.DIAMOND,
+        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(ModBlocks.MALTED_BARLEY_BLOCK.get(),
                 this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()+1));
     }
 
 
     private boolean hasRecipe() {
-        return canInsertAmountIntoOutputSlot(1) && canInsertItemIntoOutputSlot(Items.DIAMOND)
+        return canInsertAmountIntoOutputSlot(1) && canInsertItemIntoOutputSlot(ModBlocks.MALTED_BARLEY_BLOCK.get().asItem())
                 && hasRecipeItemInInputSlot();
     }
 
@@ -166,8 +167,8 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         return this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() == ModItems.BARLEY_GROWN.get();
     }
 
-    private boolean canInsertItemIntoOutputSlot(Item diamond) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(diamond)
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item)
                 || this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty();
     }
 
