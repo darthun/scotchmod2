@@ -1,9 +1,13 @@
 package net.darthun.scotchmod.block.entity;
 
 import net.darthun.scotchmod.block.ModBlocks;
+import net.darthun.scotchmod.block.custom.BarleySteepBlock;
 import net.darthun.scotchmod.item.ModItems;
 import net.darthun.scotchmod.recipe.BarleySteepRecipe;
 import net.darthun.scotchmod.screen.BarleySteepMenu;
+import net.darthun.scotchmod.utils.InventoryDirectionEntry;
+import net.darthun.scotchmod.utils.InventoryDirectionWrapper;
+import net.darthun.scotchmod.utils.WrappedHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,8 +32,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Optional;
+import java.util.Map;
+
 
 public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider {
     public BarleySteepBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -81,6 +86,15 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     private static final int OUTPUT_SLOT = 2;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            new InventoryDirectionWrapper(itemHandler,
+                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.NORTH, INPUT_SLOT, true),
+                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
+                    new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, true),
+                    new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
@@ -132,10 +146,28 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER){
-            return lazyItemHandler.cast();
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            if(side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if(directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(BarleySteepBlock.FACING);
+
+                if(side == Direction.DOWN ||side == Direction.UP) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
-        return super.getCapability(cap,side);
+
+        return super.getCapability(cap, side);
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
