@@ -25,9 +25,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.WaterFluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +79,7 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot){
                 case 0 -> true;
-                case 1 -> true; //liquid
+                case 1 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
                 case 2 -> false; //output
                 default -> super.isItemValid(slot,stack);
             };
@@ -84,6 +89,26 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     private static final int INPUT_SLOT = 0;
     private static final int FLUID_INPUT_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
+
+    private final FluidTank FLUID_TANK = createFluidTank();
+
+    private FluidTank createFluidTank() {
+        return new FluidTank(1000){
+            @Override
+            protected void onContentsChanged() {
+                setChanged();
+                if(!level.isClientSide()){
+                    level.sendBlockUpdated(getBlockPos(),getBlockState(),getBlockState(),3);
+                }
+            }
+
+            @Override
+            public boolean isFluidValid(FluidStack stack) {
+                return stack.getFluid() == Fluids.WATER;
+            }
+        };
+    }
+
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
@@ -95,6 +120,8 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, true),
                     new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
+
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
@@ -115,17 +142,20 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(()-> itemHandler);
+        lazyFluidHandler = LazyOptional.of(()-> FLUID_TANK);
     }
 
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyFluidHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory",itemHandler.serializeNBT());
+        pTag = FLUID_TANK.writeToNBT(pTag);
         super.saveAdditional(pTag);
     }
 
@@ -133,6 +163,7 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
+        FLUID_TANK.readFromNBT(pTag);
     }
 
     public void drops() {
@@ -146,10 +177,17 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+
+        if(cap == ForgeCapabilities.FLUID_HANDLER){
+            return lazyFluidHandler.cast();
+        }
+
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
             if(side == null) {
                 return lazyItemHandler.cast();
             }
+
+
 
             if(directionWrappedHandlerMap.containsKey(side)) {
                 Direction localDir = this.getBlockState().getValue(BarleySteepBlock.FACING);
@@ -171,18 +209,56 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        fillUpOnFluid();
+
 
         if (isOutputSlotEmptyOrReceivable() && hasRecipe()){
             this.progress++;
             setChanged(pLevel,pPos,pState);
             if(this.progress >= this.maxProgress){
                 craftItem();
+                extractFluid();
                 this.progress = 0;
+
             }
         }else{
             this.progress = 0;
         }
 
+    }
+
+    private void extractFluid() {
+        this.FLUID_TANK.drain(100, IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    private void fillUpOnFluid() {
+        if(hasFluidSourceInSlot(FLUID_INPUT_SLOT)){
+            transferItemFluidToTank(FLUID_INPUT_SLOT);
+        }
+    }
+
+    private void transferItemFluidToTank(int fluidInputSlot) {
+        this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem -> {
+            int drainAmount = Math.min(this.FLUID_TANK.getSpace(),1000);
+
+            FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+            if(stack.getFluid() == Fluids.WATER){
+                stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                fillTankWithWater(stack,iFluidHandlerItem.getContainer());
+            }
+        });
+
+    }
+
+    private void fillTankWithWater(FluidStack stack, ItemStack container) {
+        this.FLUID_TANK.fill(new FluidStack(stack.getFluid(),stack.getAmount()),IFluidHandler.FluidAction.EXECUTE);
+        this.itemHandler.extractItem(FLUID_INPUT_SLOT,1,false);
+        this.itemHandler.insertItem(FLUID_INPUT_SLOT,container,false);
+    }
+
+    private boolean hasFluidSourceInSlot(int fluidInputSlot) {
+        return this.itemHandler.getStackInSlot(fluidInputSlot).getCount() > 0 &&
+                this.itemHandler.getStackInSlot(fluidInputSlot).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
     }
 
     private void craftItem() {
@@ -203,7 +279,12 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
         }
         ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
         return canInsertAmountIntoOutputSlot(resultItem.getCount())
-                && canInsertItemIntoOutputSlot(resultItem.getItem());
+                && canInsertItemIntoOutputSlot(resultItem.getItem())
+                && hasEnoughFluidToCraft();
+    }
+
+    private boolean hasEnoughFluidToCraft() {
+        return this.FLUID_TANK.getFluidAmount()>=100;
     }
 
     private Optional<BarleySteepRecipe> getCurrentRecipe() {
@@ -235,4 +316,7 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     }
 
 
+    public FluidStack getFluid() {
+        return FLUID_TANK.getFluid();
+    }
 }
