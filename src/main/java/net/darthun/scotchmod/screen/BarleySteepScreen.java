@@ -30,8 +30,10 @@ public class BarleySteepScreen extends AbstractContainerScreen<BarleySteepMenu> 
     @Override
     protected void init() {
         super.init();
-        this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
+        this.inventoryLabelY = 70;
+        this.titleLabelY = 5;
+        this.inventoryLabelX = 64;
+        this.titleLabelX = 64;
         assignFluidRenderer();
     }
 
@@ -51,7 +53,7 @@ public class BarleySteepScreen extends AbstractContainerScreen<BarleySteepMenu> 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics, x, y);
-        fluidTankRenderer.render(guiGraphics,x+26,y+11, menu.blockEntity.getFluid());
+        fluidTankRenderer.render(guiGraphics,x+24,y+14, menu.blockEntity.getFluid());
     }
     private boolean isMouseAboveArea(int pMouseX,int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer){
         return MouseUtil.isMouseOver(pMouseX,pMouseY,x+offsetX, y+offsetY, renderer.getWidth(),renderer.getHeight());
@@ -74,10 +76,11 @@ public class BarleySteepScreen extends AbstractContainerScreen<BarleySteepMenu> 
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) /2;
-        int y = (height - imageHeight) /2;
-        renderFluidTooltipArea(pGuiGraphics,pMouseX,pMouseY, x,y, menu.blockEntity.getFluid(),26,11, fluidTankRenderer);
+        int y = (height - imageHeight)/2;
+        renderFluidTooltipArea(pGuiGraphics,pMouseX,pMouseY, x,y, menu.blockEntity.getFluid(),24,14, fluidTankRenderer);
 
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+
     }
 
     private void renderFluidTooltipArea(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int x, int y, FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
