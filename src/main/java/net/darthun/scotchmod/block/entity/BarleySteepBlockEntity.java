@@ -76,7 +76,11 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
     private final ItemStackHandler itemHandler = new ItemStackHandler(3){
         @Override
         protected void onContentsChanged(int slot) {
+
             setChanged();
+            if(!level.isClientSide()){
+                level.sendBlockUpdated(getBlockPos(),getBlockState(),getBlockState(),3);
+            }
         }
 
         @Override
@@ -89,6 +93,15 @@ public class BarleySteepBlockEntity extends BlockEntity implements MenuProvider 
             };
         }
     };
+
+    public ItemStack getRenderStack(){
+        ItemStack stack = itemHandler.getStackInSlot(INPUT_SLOT);
+        if(stack.isEmpty()){
+            stack = itemHandler.getStackInSlot(OUTPUT_SLOT);
+
+        }
+        return stack;
+    }
 
     private static final int INPUT_SLOT = 0;
     private static final int FLUID_INPUT_SLOT = 1;
