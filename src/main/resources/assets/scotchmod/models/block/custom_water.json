@@ -1,0 +1,17 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"4": "block/water_still"
+	},
+	"elements": [
+		{
+			"name": "waterlevel",
+			"from": [1, 7, 1],
+			"to": [16, 8, 15],
+			"faces": {
+				"up": {"uv": [0, 0, 15, 14], "texture": "#4", "cullface": "up", "tintindex": 0}
+			}
+		}
+	]
+}
