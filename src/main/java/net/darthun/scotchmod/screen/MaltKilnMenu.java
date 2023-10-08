@@ -33,9 +33,9 @@ public class MaltKilnMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler,0,54,28));
-            this.addSlot(new SlotItemHandler(iItemHandler,1,24,58));
-            this.addSlot(new SlotItemHandler(iItemHandler,2,111,28));
+            this.addSlot(new SlotItemHandler(iItemHandler,0,56,17));
+            this.addSlot(new SlotItemHandler(iItemHandler,1,56,53));
+            this.addSlot(new SlotItemHandler(iItemHandler,2,116,34));
 
         });
 

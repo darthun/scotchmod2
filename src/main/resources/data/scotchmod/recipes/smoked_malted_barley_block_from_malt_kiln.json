@@ -1,0 +1,15 @@
+{
+  "type": "scotchmod:malt_kiln",
+  "ingredients": [
+    {
+      "item": "scotchmod:malted_barley_block"
+    },
+    {
+      "item": "scotchmod:peat"
+    }
+  ],
+  "output": {
+    "item": "scotchmod:smoked_malted_barley_block",
+    "count": 1
+  }
+}
