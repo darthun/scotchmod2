@@ -3,6 +3,10 @@ package net.darthun.scotchmod.block.entity;
 
 
 
+import net.darthun.scotchmod.block.custom.MashTunBlock;
+import net.darthun.scotchmod.fluid.ModFluids;
+import net.darthun.scotchmod.recipe.MashTunRecipe;
+import net.darthun.scotchmod.screen.MashTunMenu;
 import net.darthun.scotchmod.utils.InventoryDirectionEntry;
 import net.darthun.scotchmod.utils.InventoryDirectionWrapper;
 import net.darthun.scotchmod.utils.WrappedHandler;
@@ -70,7 +74,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3){
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
         @Override
         protected void onContentsChanged(int slot) {
 
@@ -85,7 +89,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
             return switch (slot){
                 case 0 -> true;
                 case 1 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
-                case 2 -> false; //output
+                //case 2 -> false; //output
                 default -> super.isItemValid(slot,stack);
             };
         }
@@ -102,9 +106,10 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int FLUID_INPUT_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
+   // private static final int FLUID_OUTPUT_SLOT = 2;
 
     private final FluidTank FLUID_TANK = createFluidTank();
+    private final FluidTank OUTPUT_FLUID_TANK = createOutputFluidTank();
 
     private FluidTank createFluidTank() {
         return new FluidTank(1000){
@@ -123,19 +128,37 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
 
+    private FluidTank createOutputFluidTank() {
+        return new FluidTank(1000){
+            @Override
+            protected void onContentsChanged() {
+                setChanged();
+                if(!level.isClientSide()){
+                    level.sendBlockUpdated(getBlockPos(),getBlockState(),getBlockState(),3);
+                }
+            }
+
+            @Override
+            public boolean isFluidValid(FluidStack stack) {
+                return stack.getFluid() == ModFluids.SOURCE_WORT.get();
+            }
+        };
+    }
+
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
+                    //new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.NORTH, INPUT_SLOT, true),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
+                    //new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT, false),
+                    //new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, true),
                     new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
 
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+    private LazyOptional<IFluidHandler> lazyOutputFluidHandler = LazyOptional.empty();
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
@@ -157,6 +180,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(()-> itemHandler);
         lazyFluidHandler = LazyOptional.of(()-> FLUID_TANK);
+        lazyOutputFluidHandler = LazyOptional.of(()-> OUTPUT_FLUID_TANK);
     }
 
     @Override
@@ -164,12 +188,14 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyFluidHandler.invalidate();
+        lazyOutputFluidHandler.invalidate();
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory",itemHandler.serializeNBT());
         pTag = FLUID_TANK.writeToNBT(pTag);
+        pTag = OUTPUT_FLUID_TANK.writeToNBT(pTag);
         super.saveAdditional(pTag);
     }
 
@@ -178,6 +204,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         FLUID_TANK.readFromNBT(pTag);
+        OUTPUT_FLUID_TANK.readFromNBT(pTag);
     }
 
     public void drops() {
@@ -193,7 +220,12 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
         if(cap == ForgeCapabilities.FLUID_HANDLER){
-            return lazyFluidHandler.cast();
+            if(!OUTPUT_FLUID_TANK.isEmpty()){
+              return lazyOutputFluidHandler.cast();
+            }
+            else {
+                return lazyFluidHandler.cast();
+            }
         }
 
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
@@ -223,15 +255,16 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        //Empties any bucket into the water tank
         fillUpOnFluid();
 
-
-        if (isOutputSlotEmptyOrReceivable() && hasRecipe()){
+        //Do we have room in our wort tank and the smoked stuff
+        if (isOutputTankReceivable() && hasRecipe()){
             this.progress++;
             setChanged(pLevel,pPos,pState);
             if(this.progress >= this.maxProgress){
                 craftItem();
-                extractFluid();
+                craftFluid();
                 this.progress = 0;
 
             }
@@ -241,8 +274,12 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
 
     }
 
-    private void extractFluid() {
+    private void craftFluid() {
         this.FLUID_TANK.drain(100, IFluidHandler.FluidAction.EXECUTE);
+        this.OUTPUT_FLUID_TANK.fill(
+                new FluidStack(ModFluids.SOURCE_WORT.get(),10), IFluidHandler.FluidAction.EXECUTE
+
+        );
     }
 
     private void fillUpOnFluid() {
@@ -276,25 +313,21 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craftItem() {
+        //At this point, we're doing it !
         Optional<MashTunRecipe> recipe = getCurrentRecipe();
         ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
         this.itemHandler.extractItem(INPUT_SLOT,1,false);
 
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT,new ItemStack(resultItem.getItem(),
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + resultItem.getCount()));
     }
 
 
-    private boolean hasRecipe() {
+    private boolean  hasRecipe() {
         Optional<MashTunRecipe> recipe = getCurrentRecipe();
-
         if (recipe.isEmpty()) {
             return false;
         }
         ItemStack resultItem = recipe.get().getResultItem(getLevel().registryAccess());
-        return canInsertAmountIntoOutputSlot(resultItem.getCount())
-                && canInsertItemIntoOutputSlot(resultItem.getItem())
-                && hasEnoughFluidToCraft();
+        return hasEnoughFluidToCraft();
     }
 
     private boolean hasEnoughFluidToCraft() {
@@ -314,24 +347,19 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         return this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() == ModItems.yeast.get();
     }*/
 
-    private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item)
-                || this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty();
-    }
 
-    private boolean canInsertAmountIntoOutputSlot(int count) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize() >=
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count;
-    }
-
-    private boolean isOutputSlotEmptyOrReceivable() {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+    private boolean isOutputTankReceivable() {
+        //we got 1000mb in that tank, we want something under 990.
+        return this.OUTPUT_FLUID_TANK.getFluidAmount() <= (this.OUTPUT_FLUID_TANK.getCapacity()-10);
     }
 
 
     public FluidStack getFluid() {
         return FLUID_TANK.getFluid();
+    }
+
+    public FluidStack getOutputFluid() {
+        return OUTPUT_FLUID_TANK.getFluid();
     }
 
     @Nullable

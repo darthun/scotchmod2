@@ -7,8 +7,10 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.darthun.scotchmod.ScotchMod;
 import net.darthun.scotchmod.recipe.BarleySteepRecipe;
 import net.darthun.scotchmod.recipe.MaltKilnRecipe;
+import net.darthun.scotchmod.recipe.MashTunRecipe;
 import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.MaltKilnScreen;
+import net.darthun.scotchmod.screen.MashTunScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -30,6 +32,9 @@ public class JEIScotchModPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new MaltKilnRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new MashTunRecipeCategory(
+                registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -41,11 +46,15 @@ public class JEIScotchModPlugin implements IModPlugin {
 
         List<MaltKilnRecipe> maltKilnRecipes = recipeManager.getAllRecipesFor(MaltKilnRecipe.Type.INSTANCE);
         registration.addRecipes(MaltKilnRecipeCategory.MALT_KILN_TYPE, maltKilnRecipes);
+
+        List<MashTunRecipe> mashTunRecipes = recipeManager.getAllRecipesFor(MashTunRecipe.Type.INSTANCE);
+        registration.addRecipes(MashTunRecipeCategory.MASH_TUN_TYPE,mashTunRecipes);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(BarleySteepScreen.class,80,20,30,30,BarleySteepRecipeCategory.BARLEY_STEEP_TYPE);
         registration.addRecipeClickArea(MaltKilnScreen.class,80,20,30,30,MaltKilnRecipeCategory.MALT_KILN_TYPE);
+        registration.addRecipeClickArea(MashTunScreen.class,80,20,30,30,MashTunRecipeCategory.MASH_TUN_TYPE);
     }
 }

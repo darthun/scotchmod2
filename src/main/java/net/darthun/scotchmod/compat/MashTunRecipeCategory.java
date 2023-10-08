@@ -10,9 +10,12 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.darthun.scotchmod.ScotchMod;
 import net.darthun.scotchmod.block.ModBlocks;
 
+import net.darthun.scotchmod.fluid.ModFluids;
+import net.darthun.scotchmod.recipe.MashTunRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 
 public class MashTunRecipeCategory implements IRecipeCategory<MashTunRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ScotchMod.MOD_ID, "mash_tun");
@@ -54,7 +57,7 @@ public class MashTunRecipeCategory implements IRecipeCategory<MashTunRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MashTunRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 28).addIngredients(recipe.getIngredients().get(0));
-
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 111, 28).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.INPUT, 24,14).addFluidStack(Fluids.WATER,100);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 14).addFluidStack(ModFluids.SOURCE_WORT.get(),10);
     }
 }
