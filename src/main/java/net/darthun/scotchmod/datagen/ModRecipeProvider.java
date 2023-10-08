@@ -66,7 +66,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                         .build()))
                 .save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PAGODA_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MASH_TUN_BLOCK.get())
                 .pattern("SSS")
                 .pattern("CWC")
                 .pattern("CCC")
