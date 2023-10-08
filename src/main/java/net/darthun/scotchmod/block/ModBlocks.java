@@ -42,6 +42,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BARLEY_STEEP_BLOCK = registerBlock("barley_steep_block",
             () -> new BarleySteepBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
+    public static final RegistryObject<Block> MASH_TUN_BLOCK = registerBlock("mash_tun_block",
+            () -> new MashTunBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
     public static final RegistryObject<Block> MALT_KILN_BLOCK = registerBlock("malt_kiln_block",
             () -> new MaltKilnBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 

@@ -1,0 +1,12 @@
+{
+  "type": "scotchmod:mash_tun",
+  "ingredients": [
+    {
+      "item": "scotchmod:smoked_malted_barley_block"
+    }
+  ],
+  "output": {
+    "item": "scotchmod:wort_fluid",
+    "count": 1
+  }
+}
