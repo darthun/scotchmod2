@@ -53,9 +53,9 @@ public class MaltKilnRecipeCategory implements IRecipeCategory<MaltKilnRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MaltKilnRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 28).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 54, 56).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 56, 17).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 56, 53).addIngredients(recipe.getIngredients().get(1));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 111, 28).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 34).addItemStack(recipe.getResultItem(null));
     }
 }

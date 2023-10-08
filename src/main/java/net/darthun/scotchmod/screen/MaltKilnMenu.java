@@ -122,7 +122,7 @@ public class MaltKilnMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize =29; //arrow axial lenght
+        int progressArrowSize =14; //arrow axial lenght
 
         return maxProgress!=0 && progress!=0? progress* progressArrowSize / maxProgress:0;
     }

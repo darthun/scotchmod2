@@ -50,7 +50,8 @@ public class MaltKilnScreen extends AbstractContainerScreen<MaltKilnMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 75, y + 26, 176, 0, menu.getScaledProgress(), 21);
+            int arrowHeight = menu.getScaledProgress();
+            guiGraphics.blit(TEXTURE, x + 57, y + 37 + 14 - arrowHeight, 176, 0+14 - arrowHeight, 14, arrowHeight);
         }
     }
 
