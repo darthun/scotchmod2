@@ -36,7 +36,7 @@ public class MaltKilnBlock extends BaseEntityBlock {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
-    protected MaltKilnBlock(Properties pProperties) {super(pProperties);}
+    public MaltKilnBlock(Properties pProperties) {super(pProperties);}
 
     @Nullable
     @Override

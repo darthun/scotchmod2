@@ -43,7 +43,7 @@ public class ModBlocks {
             () -> new BarleySteepBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> MALT_KILN_BLOCK = registerBlock("malt_kiln_block",
-            () -> new BarleySteepBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+            () -> new MaltKilnBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> BARLEY_BLOCK = BLOCKS.register("barley_block",
             () -> new BarleyCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));

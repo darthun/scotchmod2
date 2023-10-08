@@ -17,8 +17,10 @@
   "block.scotchmod.bogearth_block": "Bog Earth",
   "block.scotchmod.cherryoak_barrel_block": "Cherry-Oak Scotch Barrel",
   "block.scotchmod.pagoda_block": "Pagoda Roof",
+  "block.scotchmod.malt_kiln_block": "Malt Kiln",
 
   "tooltip.scotchmod.bogearth_block": "Place near water to make Peat",
+  "tooltip.scotchmod.pagoda_block": "Place a Pagoda Roof on a Furnace to make a Malt Kiln",
   "scotchmod.tooltip.liquid.amount.with.capacity":"%s / %s mB",
   "scotchmod.tooltip.liquid.amount":"%s mB",
 
