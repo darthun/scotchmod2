@@ -14,6 +14,9 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<BarleySteepRecipe>> BARLEY_STEEP_SERIALIZER =
             SERIALIZERS.register("barley_steep", () -> BarleySteepRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<MaltKilnRecipe>> MALT_KILN_SERIALIZER =
+            SERIALIZERS.register("malt_kiln", () -> MaltKilnRecipe.Serializer.INSTANCE);
+
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
     }

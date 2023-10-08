@@ -37,6 +37,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.MALTED_BARLEY_BLOCK.get());
                         pOutput.accept(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get());
                         pOutput.accept(ModBlocks.PAGODA_BLOCK.get());
+                        pOutput.accept(ModBlocks.MALT_KILN_BLOCK.get());
 
                     })
                     .build());

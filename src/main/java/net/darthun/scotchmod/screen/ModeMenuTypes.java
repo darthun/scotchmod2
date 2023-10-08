@@ -17,6 +17,9 @@ public class ModeMenuTypes {
     public static final RegistryObject<MenuType<BarleySteepMenu>> BARLEY_STEEP_MENU =
             registerMenuType(BarleySteepMenu::new,"barley_steep_menu");
 
+    public static final RegistryObject<MenuType<MaltKilnMenu>> MALT_KILN_MENU =
+            registerMenuType(MaltKilnMenu::new,"malt_kiln_menu");
+
     public static void register(IEventBus eventBus){
         MENUS.register(eventBus);
     }

@@ -34,6 +34,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK);
         simpleBlock(ModBlocks.PAGODA_BLOCK.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/pagoda_block")));
+        horizontalBlock(ModBlocks.MALT_KILN_BLOCK.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/malt_kiln_block")));
 
     }
 

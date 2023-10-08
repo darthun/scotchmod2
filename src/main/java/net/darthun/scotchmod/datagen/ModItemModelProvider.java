@@ -24,6 +24,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         complexBlock(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
         complexBlock(ModBlocks.BARLEY_STEEP_BLOCK.get());
         complexBlock(ModBlocks.PAGODA_BLOCK.get());
+        complexBlock(ModBlocks.MALT_KILN_BLOCK.get());
 
     }
 

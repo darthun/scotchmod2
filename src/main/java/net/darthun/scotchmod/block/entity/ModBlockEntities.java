@@ -18,6 +18,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(BarleySteepBlockEntity::new,
                             ModBlocks.BARLEY_STEEP_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<BarleySteepBlockEntity>> MALT_KILN_BE =
+            BLOCK_ENTITIES.register("malt_kiln_block_entity",()->
+                    BlockEntityType.Builder.of(BarleySteepBlockEntity::new,
+                            ModBlocks.MALT_KILN_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

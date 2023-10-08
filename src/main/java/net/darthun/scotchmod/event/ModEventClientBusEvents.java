@@ -1,6 +1,7 @@
 package net.darthun.scotchmod.event;
 
 import net.darthun.scotchmod.ScotchMod;
+import net.darthun.scotchmod.block.entity.MaltKilnBlockEntity;
 import net.darthun.scotchmod.block.entity.ModBlockEntities;
 import net.darthun.scotchmod.block.entity.renderer.BarleySteepBlockEntityRenderer;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +22,9 @@ public class ModEventClientBusEvents {
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.BARLEY_STEEP_BE.get(),
                 BarleySteepBlockEntityRenderer::new);
+        //TODO MALT_KILN MaltKiln Rendering
+//        event.registerBlockEntityRenderer(ModBlockEntities.MALT_KILN_BE.get(),
+//                MaltKilnBlockEntityRenderer::new);
     }
 
 }
