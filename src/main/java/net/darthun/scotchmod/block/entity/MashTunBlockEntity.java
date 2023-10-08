@@ -97,10 +97,6 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
 
     public ItemStack getRenderStack(){
         ItemStack stack = itemHandler.getStackInSlot(INPUT_SLOT);
-        if(stack.isEmpty()){
-            stack = itemHandler.getStackInSlot(OUTPUT_SLOT);
-
-        }
         return stack;
     }
 
