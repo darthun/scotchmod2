@@ -1,8 +1,11 @@
 package net.darthun.scotchmod.block.entity;
 
 
+import net.darthun.scotchmod.block.ModBlocks;
 import net.darthun.scotchmod.block.custom.MaltKilnBlock;
 import net.darthun.scotchmod.item.ModItems;
+import net.darthun.scotchmod.recipe.MaltKilnRecipe;
+import net.darthun.scotchmod.screen.MaltKilnMenu;
 import net.darthun.scotchmod.utils.InventoryDirectionEntry;
 import net.darthun.scotchmod.utils.InventoryDirectionWrapper;
 import net.darthun.scotchmod.utils.WrappedHandler;
@@ -198,7 +201,8 @@ public class MaltKilnBlockEntity extends BlockEntity implements MenuProvider {
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
 
-        if (isOutputSlotEmptyOrReceivable() && hasRecipe()){
+        if (isOutputSlotEmptyOrReceivable() && hasRecipe()
+                && hasPagodaRoof(pLevel,pPos)){
             this.progress++;
             setChanged(pLevel,pPos,pState);
             if(this.progress >= this.maxProgress){
@@ -210,6 +214,10 @@ public class MaltKilnBlockEntity extends BlockEntity implements MenuProvider {
             this.progress = 0;
         }
 
+    }
+
+    private boolean hasPagodaRoof(Level pLevel, BlockPos pPos){
+        return pLevel.getBlockState(pPos.above()).getBlock() == ModBlocks.PAGODA_BLOCK.get();
     }
 
     private void craftItem() {

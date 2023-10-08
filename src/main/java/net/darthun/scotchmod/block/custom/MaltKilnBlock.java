@@ -1,6 +1,7 @@
 package net.darthun.scotchmod.block.custom;
 
 
+import net.darthun.scotchmod.block.entity.MaltKilnBlockEntity;
 import net.darthun.scotchmod.block.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
