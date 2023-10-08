@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "scotchmod:barley_steep_block",
+    "scotchmod:malt_kiln_block",
     "scotchmod:pagoda_block"
 
   ]

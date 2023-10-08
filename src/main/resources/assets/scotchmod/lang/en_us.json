@@ -18,6 +18,13 @@
   "block.scotchmod.cherryoak_barrel_block": "Cherry-Oak Scotch Barrel",
   "block.scotchmod.pagoda_block": "Pagoda Roof",
   "block.scotchmod.malt_kiln_block": "Malt Kiln",
+  "block.scotchmod.barley_steep_block": "Barley Steep",
+
+  "fluid_type.scotchmod.wash_fluid": "Wash",
+  "fluid_type.scotchmod.wort_fluid": "Wort",
+  "fluid_type.scotchmod.distilled_wash_fluid": "Distilled Wash",
+  "fluid_type.scotchmod.new_make_fluid": "New Make Scotch",
+  "fluid_type.scotchmod.glendarthun_fluid": "Glendarthun Scotch",
 
   "tooltip.scotchmod.bogearth_block": "Place near water to make Peat",
   "tooltip.scotchmod.pagoda_block": "Place a Pagoda Roof on a Furnace to make a Malt Kiln",
