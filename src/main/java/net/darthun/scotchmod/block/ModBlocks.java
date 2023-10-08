@@ -1,10 +1,7 @@
 package net.darthun.scotchmod.block;
 
 import net.darthun.scotchmod.ScotchMod;
-import net.darthun.scotchmod.block.custom.BarleyCropBlock;
-import net.darthun.scotchmod.block.custom.BarleySteepBlock;
-import net.darthun.scotchmod.block.custom.BogearthBlock;
-import net.darthun.scotchmod.block.custom.CherryoakBarrelBlock;
+import net.darthun.scotchmod.block.custom.*;
 import net.darthun.scotchmod.fluid.ModFluids;
 import net.darthun.scotchmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -65,6 +62,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CUSTOM_WATER = registerBlock("custom_water",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+
+    public static final RegistryObject<Block> PAGODA_BLOCK = registerBlock("pagoda_block",
+            () -> new PagodaBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .requiresCorrectToolForDrops()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);

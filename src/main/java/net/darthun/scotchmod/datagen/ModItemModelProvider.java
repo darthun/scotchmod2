@@ -23,6 +23,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         //simpleItem(ModItems.ALEXANDRITE);
         complexBlock(ModBlocks.CHERRYOAK_BARREL_BLOCK.get());
         complexBlock(ModBlocks.BARLEY_STEEP_BLOCK.get());
+        complexBlock(ModBlocks.PAGODA_BLOCK.get());
 
     }
 

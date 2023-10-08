@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "scotchmod:barley_steep_block"
+    "scotchmod:barley_steep_block",
+    "scotchmod:pagoda_block"
+
   ]
 }

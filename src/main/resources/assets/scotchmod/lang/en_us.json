@@ -16,6 +16,7 @@
   "block.scotchmod.smoked_malted_barley_block": "Smoked Malted Barley",
   "block.scotchmod.bogearth_block": "Bog Earth",
   "block.scotchmod.cherryoak_barrel_block": "Cherry-Oak Scotch Barrel",
+  "block.scotchmod.pagoda_block": "Pagoda Roof",
 
   "tooltip.scotchmod.bogearth_block": "Place near water to make Peat",
   "scotchmod.tooltip.liquid.amount.with.capacity":"%s / %s mB",

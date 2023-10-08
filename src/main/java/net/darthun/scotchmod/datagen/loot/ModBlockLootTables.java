@@ -31,6 +31,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BARLEY_STEEP_BLOCK.get());
         this.dropSelf(ModBlocks.MALTED_BARLEY_BLOCK.get());
         this.dropSelf(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get());
+        this.dropSelf(ModBlocks.PAGODA_BLOCK.get());
 
 
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BARLEY_BLOCK.get())
