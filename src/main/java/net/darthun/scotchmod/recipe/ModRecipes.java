@@ -20,6 +20,9 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<MashTunRecipe>> MASH_TUN_SERIALIZER =
             SERIALIZERS.register("mash_tun", () -> MashTunRecipe.Serializer.INSTANCE);
 
+    public static final RegistryObject<RecipeSerializer<WashbackRecipe>> WASHBACK_SERIALIZER =
+            SERIALIZERS.register("washback", () -> WashbackRecipe.Serializer.INSTANCE);
+
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
     }

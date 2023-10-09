@@ -33,16 +33,24 @@ public class WashbackBlockEntityRenderer implements BlockEntityRenderer<Washback
     public void render(WashbackBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer,
                        int pPackedLight, int pPackedOverlay) {
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        //Render Wash else render Wort
+        //Render Wash else render Wort get the color
+        //0xFF864B09 wort
+        //0xFFA09D89 wash
         FluidStack fluidStack = pBlockEntity.getOutputFluid();
+        int tintcolor =0;
         if(fluidStack.isEmpty()){
             fluidStack = pBlockEntity.getFluid();
+            tintcolor = 0xFF864B09; //wort
+        }
+        else{
+            tintcolor = 0xFFA09D89; //wash
         }
             //RenderType.translucent()
         //Draw Fluid
         if(!fluidStack.isEmpty()){
             pPoseStack.pushPose();
-            this.renderSingleBlock(blockRenderer, ModBlocks.CUSTOM_WATER.get().defaultBlockState(),pPoseStack,pBuffer,pPackedLight,pPackedOverlay,ModelData.EMPTY,null);
+            this.renderSingleBlock(blockRenderer, ModBlocks.CUSTOM_WATER.get().defaultBlockState(),pPoseStack,pBuffer,
+                    pPackedLight,pPackedOverlay,ModelData.EMPTY,null,tintcolor);
             pPoseStack.popPose();
         }
 
@@ -75,14 +83,16 @@ public class WashbackBlockEntityRenderer implements BlockEntityRenderer<Washback
 //        }
 //    }
 
-    public void renderSingleBlock(BlockRenderDispatcher pDispatcher,BlockState pState, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay, ModelData modelData, RenderType renderType) {
+    public void renderSingleBlock(BlockRenderDispatcher pDispatcher,BlockState pState, PoseStack pPoseStack,
+                                  MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay,
+                                  ModelData modelData, RenderType renderType,int tintcolor) {
         RenderShape rendershape = pState.getRenderShape();
 
         if (rendershape != RenderShape.INVISIBLE) {
             switch (rendershape) {
                 case MODEL:
                     BakedModel bakedmodel = pDispatcher.getBlockModel(pState);
-                    int i = 0x3F76E4; //Shade of blue for minecraft's water
+                    int i = tintcolor;
                     float f = (float)(i >> 16 & 255) / 255.0F;
                     float f1 = (float)(i >> 8 & 255) / 255.0F;
                     float f2 = (float)(i & 255) / 255.0F;
