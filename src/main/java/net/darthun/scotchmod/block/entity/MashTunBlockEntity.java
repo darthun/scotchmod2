@@ -190,8 +190,8 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory",itemHandler.serializeNBT());
-        pTag = FLUID_TANK.writeToNBT(pTag);
-        pTag = OUTPUT_FLUID_TANK.writeToNBT(pTag);
+        pTag.put("fluidTank",FLUID_TANK.writeToNBT(new CompoundTag()));
+        pTag.put("outputFluidTank",OUTPUT_FLUID_TANK.writeToNBT(new CompoundTag()));
         super.saveAdditional(pTag);
     }
 
@@ -199,8 +199,14 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag pTag) {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        FLUID_TANK.readFromNBT(pTag);
-        OUTPUT_FLUID_TANK.readFromNBT(pTag);
+
+        if(pTag.contains("fluidTank")){
+            FLUID_TANK.readFromNBT(pTag.getCompound("fluidTank"));
+        }
+
+        if(pTag.contains("outputFluidTank")){
+            OUTPUT_FLUID_TANK.readFromNBT(pTag.getCompound("outputFluidTank"));
+        }
     }
 
     public void drops() {
@@ -264,12 +270,10 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
         }
 
     }
-
     private void craftFluid() {
         this.FLUID_TANK.drain(100, IFluidHandler.FluidAction.EXECUTE);
         this.OUTPUT_FLUID_TANK.fill(
                 new FluidStack(ModFluids.SOURCE_WORT.get(),100), IFluidHandler.FluidAction.EXECUTE
-
         );
     }
 
