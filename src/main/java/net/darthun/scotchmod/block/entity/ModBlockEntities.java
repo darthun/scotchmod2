@@ -28,6 +28,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(MashTunBlockEntity::new,
                             ModBlocks.MASH_TUN_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<WashbackBlockEntity>> WASHBACK_BE =
+            BLOCK_ENTITIES.register("washback_block_entity",()->
+                    BlockEntityType.Builder.of(WashbackBlockEntity::new,
+                            ModBlocks.WASHBACK_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

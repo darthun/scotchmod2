@@ -118,7 +118,7 @@ public class WashbackBlockEntity extends BlockEntity implements MenuProvider {
 
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid() == Fluids.WATER;
+                return stack.getFluid() == ModFluids.SOURCE_WORT.get();
             }
         };
     }
@@ -135,7 +135,7 @@ public class WashbackBlockEntity extends BlockEntity implements MenuProvider {
 
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid() == ModFluids.SOURCE_WORT.get();
+                return stack.getFluid() == ModFluids.SOURCE_WASH.get();
             }
         };
     }
@@ -272,7 +272,7 @@ public class WashbackBlockEntity extends BlockEntity implements MenuProvider {
     private void craftFluid() {
         this.FLUID_TANK.drain(100, IFluidHandler.FluidAction.EXECUTE);
         this.OUTPUT_FLUID_TANK.fill(
-                new FluidStack(ModFluids.SOURCE_WORT.get(),100), IFluidHandler.FluidAction.EXECUTE
+                new FluidStack(ModFluids.SOURCE_WASH.get(),100), IFluidHandler.FluidAction.EXECUTE
         );
     }
 
@@ -287,7 +287,7 @@ public class WashbackBlockEntity extends BlockEntity implements MenuProvider {
             int drainAmount = Math.min(this.FLUID_TANK.getSpace(),1000);
 
             FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            if(stack.getFluid() == Fluids.WATER){
+            if(stack.getFluid() == ModFluids.SOURCE_WORT.get()){
                 stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
                 fillTankWithWater(stack,iFluidHandlerItem.getContainer());
             }

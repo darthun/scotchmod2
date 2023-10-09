@@ -8,6 +8,7 @@ import net.darthun.scotchmod.ScotchMod;
 import net.darthun.scotchmod.recipe.BarleySteepRecipe;
 import net.darthun.scotchmod.recipe.MaltKilnRecipe;
 import net.darthun.scotchmod.recipe.MashTunRecipe;
+import net.darthun.scotchmod.recipe.WashbackRecipe;
 import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.MaltKilnScreen;
 import net.darthun.scotchmod.screen.MashTunScreen;
@@ -35,6 +36,9 @@ public class JEIScotchModPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new MashTunRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new WashbackRecipeCategory(
+                registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -49,6 +53,9 @@ public class JEIScotchModPlugin implements IModPlugin {
 
         List<MashTunRecipe> mashTunRecipes = recipeManager.getAllRecipesFor(MashTunRecipe.Type.INSTANCE);
         registration.addRecipes(MashTunRecipeCategory.MASH_TUN_TYPE,mashTunRecipes);
+
+        List<WashbackRecipe> washbackRecipes = recipeManager.getAllRecipesFor(WashbackRecipe.Type.INSTANCE);
+        registration.addRecipes(WashbackRecipeCategory.WASHBACK_TYPE,washbackRecipes);
     }
 
     @Override

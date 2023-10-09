@@ -13,6 +13,7 @@ import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.MashTunScreen;
 import net.darthun.scotchmod.screen.ModeMenuTypes;
 import net.darthun.scotchmod.screen.MaltKilnScreen;
+import net.darthun.scotchmod.screen.WashbackScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;

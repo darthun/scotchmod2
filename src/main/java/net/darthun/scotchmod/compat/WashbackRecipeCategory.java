@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.Fluids;
 public class WashbackRecipeCategory implements IRecipeCategory<WashbackRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(ScotchMod.MOD_ID, "washback");
     public static final ResourceLocation TEXTURE = new ResourceLocation(ScotchMod.MOD_ID,
-            "textures/gui/washback_gui.png");
+            "textures/gui/mash_tun_gui.png");
 
     public static final RecipeType<WashbackRecipe> WASHBACK_TYPE =
             new RecipeType<>(UID, WashbackRecipe.class);
@@ -57,7 +57,7 @@ public class WashbackRecipeCategory implements IRecipeCategory<WashbackRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, WashbackRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 28).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 24,14).addFluidStack(Fluids.WATER,1000).setFluidRenderer(1000,false,16,39);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 14).addFluidStack(ModFluids.SOURCE_WORT.get(),1000).setFluidRenderer(1000,false,16,39);
+        builder.addSlot(RecipeIngredientRole.INPUT, 24,14).addFluidStack(ModFluids.SOURCE_WORT.get(),1000).setFluidRenderer(1000,false,16,39);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 14).addFluidStack(ModFluids.SOURCE_WASH.get(),1000).setFluidRenderer(1000,false,16,39);
     }
 }
