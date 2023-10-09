@@ -268,7 +268,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     private void craftFluid() {
         this.FLUID_TANK.drain(100, IFluidHandler.FluidAction.EXECUTE);
         this.OUTPUT_FLUID_TANK.fill(
-                new FluidStack(ModFluids.SOURCE_WORT.get(),10), IFluidHandler.FluidAction.EXECUTE
+                new FluidStack(ModFluids.SOURCE_WORT.get(),100), IFluidHandler.FluidAction.EXECUTE
 
         );
     }
