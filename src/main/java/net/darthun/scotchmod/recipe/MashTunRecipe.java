@@ -18,16 +18,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class MashTunRecipe implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
-    private final FluidStack output;
+    private final ItemStack output;
     private final ResourceLocation id;
 
-    public MashTunRecipe(ResourceLocation id, FluidStack output, NonNullList<Ingredient> inputItems) {
+    public MashTunRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> inputItems) {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
     }
 
-    public FluidStack getOutput(){
+    public ItemStack getOutput(){
         return this.output;
     }
 
@@ -88,13 +88,6 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public MashTunRecipe fromJson(ResourceLocation id, JsonObject json) {
-            JsonObject outputObject = GsonHelper.getAsJsonObject(json, "output");
-            String fluidId = GsonHelper.getAsString(outputObject,"fluid");
-            Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidId));
-            int fluidAmount = GsonHelper.getAsInt(outputObject,"count");
-
-            FluidStack output = new FluidStack(fluid,fluidAmount);
-
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
 
@@ -102,7 +95,7 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new MashTunRecipe(id, output, inputs);
+            return new MashTunRecipe(id, ItemStack.EMPTY, inputs);
         }
 
         @Override
@@ -112,9 +105,7 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
-
-            FluidStack output = FluidStack.readFromPacket(buf);
-            return new MashTunRecipe(id, output, inputs);
+            return new MashTunRecipe(id, ItemStack.EMPTY, inputs);
         }
 
         @Override
@@ -124,8 +115,6 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-
-            recipe.getOutput().writeToPacket(buf);
         }
     }
 }
