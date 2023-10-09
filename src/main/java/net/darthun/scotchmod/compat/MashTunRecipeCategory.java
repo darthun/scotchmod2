@@ -57,7 +57,7 @@ public class MashTunRecipeCategory implements IRecipeCategory<MashTunRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MashTunRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 28).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 24,14).addFluidStack(Fluids.WATER,1000);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 14).addFluidStack(ModFluids.SOURCE_WORT.get(),1000);
+        builder.addSlot(RecipeIngredientRole.INPUT, 24,14).addFluidStack(Fluids.WATER,1000).setFluidRenderer(1000,false,16,39);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 14).addFluidStack(ModFluids.SOURCE_WORT.get(),1000).setFluidRenderer(1000,false,16,39);
     }
 }
