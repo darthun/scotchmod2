@@ -53,6 +53,7 @@ public class MashTunScreen extends AbstractContainerScreen<MashTunMenu> {
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics, x, y);
+
         fluidTankRenderer.render(guiGraphics,x+24,y+14, menu.blockEntity.getFluid());
         fluidTankRenderer.render(guiGraphics,x+113,y+14, menu.blockEntity.getOutputFluid());
     }
@@ -79,7 +80,7 @@ public class MashTunScreen extends AbstractContainerScreen<MashTunMenu> {
         int x = (width - imageWidth) /2;
         int y = (height - imageHeight)/2;
         renderFluidTooltipArea(pGuiGraphics,pMouseX,pMouseY, x,y, menu.blockEntity.getFluid(),24,14, fluidTankRenderer);
-
+        renderFluidTooltipArea(pGuiGraphics,pMouseX,pMouseY, x,y, menu.blockEntity.getOutputFluid(),113,14, fluidTankRenderer);
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
 
     }
