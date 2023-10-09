@@ -12,18 +12,25 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class MashTunRecipe implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> inputItems;
-    private final ItemStack output;
+    private final FluidStack output;
     private final ResourceLocation id;
 
-    public MashTunRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> inputItems) {
+    public MashTunRecipe(ResourceLocation id, FluidStack output, NonNullList<Ingredient> inputItems) {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
     }
+
+    public FluidStack getOutput(){
+        return this.output;
+    }
+
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) {
@@ -35,7 +42,7 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
-        return output.copy();
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-        return output.copy();
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -81,7 +88,12 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public MashTunRecipe fromJson(ResourceLocation id, JsonObject json) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
+            JsonObject outputObject = GsonHelper.getAsJsonObject(json, "output");
+            String fluidId = GsonHelper.getAsString(outputObject,"fluid");
+            Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidId));
+            int fluidAmount = GsonHelper.getAsInt(outputObject,"count");
+
+            FluidStack output = new FluidStack(fluid,fluidAmount);
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
@@ -101,7 +113,7 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromNetwork(buf));
             }
 
-            ItemStack output = buf.readItem();
+            FluidStack output = FluidStack.readFromPacket(buf);
             return new MashTunRecipe(id, output, inputs);
         }
 
@@ -112,7 +124,8 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItemStack(recipe.getResultItem(null), false);
+
+            recipe.getOutput().writeToPacket(buf);
         }
     }
 }
