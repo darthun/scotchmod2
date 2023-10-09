@@ -216,12 +216,7 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
         if(cap == ForgeCapabilities.FLUID_HANDLER){
-            if(!OUTPUT_FLUID_TANK.isEmpty()){
-              return lazyOutputFluidHandler.cast();
-            }
-            else {
                 return lazyFluidHandler.cast();
-            }
         }
 
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
@@ -345,8 +340,8 @@ public class MashTunBlockEntity extends BlockEntity implements MenuProvider {
 
 
     private boolean isOutputTankReceivable() {
-        //we got 1000mb in that tank, we want something under 990.
-        return this.OUTPUT_FLUID_TANK.getFluidAmount() <= (this.OUTPUT_FLUID_TANK.getCapacity()-10);
+        //we got 1000mb in that tank, we want something under 900.
+        return this.OUTPUT_FLUID_TANK.getFluidAmount() <= (this.OUTPUT_FLUID_TANK.getCapacity()-100);
     }
 
 

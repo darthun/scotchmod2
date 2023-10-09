@@ -54,6 +54,7 @@ public class MashTunScreen extends AbstractContainerScreen<MashTunMenu> {
 
         renderProgressArrow(guiGraphics, x, y);
         fluidTankRenderer.render(guiGraphics,x+24,y+14, menu.blockEntity.getFluid());
+        fluidTankRenderer.render(guiGraphics,x+113,y+14, menu.blockEntity.getOutputFluid());
     }
     private boolean isMouseAboveArea(int pMouseX,int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer){
         return MouseUtil.isMouseOver(pMouseX,pMouseY,x+offsetX, y+offsetY, renderer.getWidth(),renderer.getHeight());
