@@ -23,6 +23,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(MaltKilnBlockEntity::new,
                             ModBlocks.MALT_KILN_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<MashTunBlockEntity>> MASH_TUN_BE =
+            BLOCK_ENTITIES.register("mash_tun_block_entity",()->
+                    BlockEntityType.Builder.of(MashTunBlockEntity::new,
+                            ModBlocks.MASH_TUN_BLOCK.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

@@ -10,6 +10,7 @@ import net.darthun.scotchmod.item.ModCreativeModTabs;
 import net.darthun.scotchmod.item.ModItems;
 import net.darthun.scotchmod.recipe.ModRecipes;
 import net.darthun.scotchmod.screen.BarleySteepScreen;
+import net.darthun.scotchmod.screen.MashTunScreen;
 import net.darthun.scotchmod.screen.ModeMenuTypes;
 import net.darthun.scotchmod.screen.MaltKilnScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -158,6 +159,7 @@ public class ScotchMod
 
                 MenuScreens.register(ModeMenuTypes.BARLEY_STEEP_MENU.get(), BarleySteepScreen::new);
                 MenuScreens.register(ModeMenuTypes.MALT_KILN_MENU.get(), MaltKilnScreen::new);
+                MenuScreens.register(ModeMenuTypes.MASH_TUN_MENU.get(), MashTunScreen::new);
             });
         }
     }

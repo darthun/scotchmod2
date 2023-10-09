@@ -20,6 +20,8 @@ public class ModeMenuTypes {
     public static final RegistryObject<MenuType<MaltKilnMenu>> MALT_KILN_MENU =
             registerMenuType(MaltKilnMenu::new,"malt_kiln_menu");
 
+    public static final RegistryObject<MenuType<MashTunMenu>> MASH_TUN_MENU =
+            registerMenuType(MashTunMenu::new,"mash_tun_menu");
     public static void register(IEventBus eventBus){
         MENUS.register(eventBus);
     }
