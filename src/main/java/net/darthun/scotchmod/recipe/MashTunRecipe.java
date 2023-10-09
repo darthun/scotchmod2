@@ -27,10 +27,6 @@ public class MashTunRecipe implements Recipe<SimpleContainer> {
         this.id = id;
     }
 
-    public ItemStack getOutput(){
-        return this.output;
-    }
-
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if(pLevel.isClientSide()) {
