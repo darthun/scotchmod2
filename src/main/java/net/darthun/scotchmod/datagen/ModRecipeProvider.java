@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.lwjgl.openal.AL;
 
@@ -74,6 +75,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get())
                 .define('W', Items.WATER_BUCKET)
                 .unlockedBy("has_smokedmaltedbarley",inventoryTrigger(ItemPredicate.Builder.item().of(ModBlocks.SMOKED_MALTED_BARLEY_BLOCK.get())
+                        .build()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WASHBACK_BLOCK.get())
+                .pattern("YYY")
+                .pattern("CWC")
+                .pattern("CCC")
+                .define('C', ModBlocks.CHERRYOAK_BARREL_BLOCK.get())
+                .define('Y', ModItems.YEAST.get())
+                .define('W', ModItems.WORT_BUCKET.get())
+                .unlockedBy("has_yeast",inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.YEAST.get())
                         .build()))
                 .save(pWriter);
 

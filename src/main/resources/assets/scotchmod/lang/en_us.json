@@ -20,6 +20,7 @@
   "block.scotchmod.malt_kiln_block": "Malt Kiln",
   "block.scotchmod.barley_steep_block": "Barley Steep",
   "block.scotchmod.mash_tun_block": "Mash Tun",
+  "block.scotchmod.washback_block": "Washback",
 
   "fluid_type.scotchmod.wash_fluid": "Wash",
   "fluid_type.scotchmod.wort_fluid": "Wort",

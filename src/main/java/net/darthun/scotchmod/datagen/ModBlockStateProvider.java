@@ -38,6 +38,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 new ModelFile.UncheckedModelFile(modLoc("block/malt_kiln_block")));
         horizontalBlock(ModBlocks.MASH_TUN_BLOCK.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/mash_tun_block")));
+        horizontalBlock(ModBlocks.WASHBACK_BLOCK.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/washback_block")));
 
     }
 

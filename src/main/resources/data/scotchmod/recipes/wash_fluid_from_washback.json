@@ -1,0 +1,12 @@
+{
+  "type": "scotchmod:washback",
+  "ingredients": [
+    {
+      "item": "scotchmod:yeast"
+    }
+  ],
+  "output": {
+    "fluid": "scotchmod:wash_fluid",
+    "count": 100
+  }
+}

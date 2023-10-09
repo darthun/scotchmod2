@@ -26,6 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         complexBlock(ModBlocks.PAGODA_BLOCK.get());
         complexBlock(ModBlocks.MALT_KILN_BLOCK.get());
         complexBlock(ModBlocks.MASH_TUN_BLOCK.get());
+        complexBlock(ModBlocks.WASHBACK_BLOCK.get());
 
     }
 

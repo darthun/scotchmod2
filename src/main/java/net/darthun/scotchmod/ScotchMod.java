@@ -160,6 +160,7 @@ public class ScotchMod
                 MenuScreens.register(ModeMenuTypes.BARLEY_STEEP_MENU.get(), BarleySteepScreen::new);
                 MenuScreens.register(ModeMenuTypes.MALT_KILN_MENU.get(), MaltKilnScreen::new);
                 MenuScreens.register(ModeMenuTypes.MASH_TUN_MENU.get(), MashTunScreen::new);
+                MenuScreens.register(ModeMenuTypes.WASHBACK_MENU.get(), WashbackScreen::new);
             });
         }
     }

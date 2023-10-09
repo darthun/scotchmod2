@@ -22,6 +22,9 @@ public class ModeMenuTypes {
 
     public static final RegistryObject<MenuType<MashTunMenu>> MASH_TUN_MENU =
             registerMenuType(MashTunMenu::new,"mash_tun_menu");
+
+    public static final RegistryObject<MenuType<WashbackMenu>> WASHBACK_MENU =
+            registerMenuType(WashbackMenu::new,"washback_menu");
     public static void register(IEventBus eventBus){
         MENUS.register(eventBus);
     }
