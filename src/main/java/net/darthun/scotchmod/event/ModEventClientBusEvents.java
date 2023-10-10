@@ -5,6 +5,7 @@ import net.darthun.scotchmod.block.entity.MaltKilnBlockEntity;
 import net.darthun.scotchmod.block.entity.ModBlockEntities;
 import net.darthun.scotchmod.block.entity.renderer.BarleySteepBlockEntityRenderer;
 import net.darthun.scotchmod.block.entity.renderer.WashbackBlockEntityRenderer;
+import net.darthun.scotchmod.block.entity.renderer.MashTunBlockEntityRenderer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -29,6 +30,9 @@ public class ModEventClientBusEvents {
 
         event.registerBlockEntityRenderer(ModBlockEntities.WASHBACK_BE.get(),
                 WashbackBlockEntityRenderer::new);
+
+        event.registerBlockEntityRenderer(ModBlockEntities.MASH_TUN_BE.get(),
+                MashTunBlockEntityRenderer::new);
     }
 
 }

@@ -12,6 +12,7 @@ import net.darthun.scotchmod.recipe.WashbackRecipe;
 import net.darthun.scotchmod.screen.BarleySteepScreen;
 import net.darthun.scotchmod.screen.MaltKilnScreen;
 import net.darthun.scotchmod.screen.MashTunScreen;
+import net.darthun.scotchmod.screen.WashbackScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -63,5 +64,6 @@ public class JEIScotchModPlugin implements IModPlugin {
         registration.addRecipeClickArea(BarleySteepScreen.class,80,20,30,30,BarleySteepRecipeCategory.BARLEY_STEEP_TYPE);
         registration.addRecipeClickArea(MaltKilnScreen.class,80,20,30,30,MaltKilnRecipeCategory.MALT_KILN_TYPE);
         registration.addRecipeClickArea(MashTunScreen.class,80,20,30,30,MashTunRecipeCategory.MASH_TUN_TYPE);
+        registration.addRecipeClickArea(WashbackScreen.class,80,20,30,30,WashbackRecipeCategory.WASHBACK_TYPE);
     }
 }
