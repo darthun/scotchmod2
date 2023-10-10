@@ -60,7 +60,7 @@
 		},
 		{
 			"from": [1, 0, 1],
-			"to": [15, 0, 15],
+			"to": [15, 1, 15],
 			"faces": {
 				"north": {"uv": [0, 0, 14, 0], "texture": "#missing"},
 				"east": {"uv": [0, 0, 14, 0], "texture": "#missing"},
